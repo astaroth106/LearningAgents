@@ -1,5 +1,5 @@
 # LearningAgents
 SeniorProjectUTRGV2016
 
-Carlos Pena
+Carlos Pena\n
 Angel Hernandez
