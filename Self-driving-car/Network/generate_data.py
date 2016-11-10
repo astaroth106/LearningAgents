@@ -11,9 +11,10 @@ def create_road(height=128, width=128, offset=0.0):
   if (math.fabs(offset) > left_edge):
     offset = math.copysign(left_edge, offset)
 
-  rows, columns = skimage.draw.polygon(  \
-    [0, height, height, 0],              \
-    [left_edge + offset, left_edge, right_edge, right_edge + offset])
+  r = np.array([0, height, height, 0])              
+  c = np.array([left_edge + offset, left_edge, right_edge, right_edge + offset])
+  
+  rows, columns = skimage.draw.polygon(r, c)
   image[rows, columns] = 1
   image = image[:, :, np.newaxis]
   return image

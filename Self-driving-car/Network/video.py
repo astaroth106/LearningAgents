@@ -4,12 +4,13 @@ import cv2
 import numpy as np
 import tensorflow as tf
 import socket
+import sys
 
 sys.path.append("car_dir/")
 
-import video_dir
-import car_dir
-import motor
+#import video_dir
+#import car_dir
+#import motor
 
 video_output = True
 
@@ -33,7 +34,7 @@ input_size = 128
 capture = cv2.VideoCapture(0)
 
 model = train.build_model()
-model.load('checkpoints/road_model1-360')
+model.load('checkpoints/road_model1-200000')
 
 def process_frame(frame):
   pr = model.predict(frame[np.newaxis, :, :, np.newaxis])
@@ -56,12 +57,13 @@ while capture.isOpened():
       output_value =  process_frame(frame_small)
       print(output_value)
       if output_value > 0:
-		  car_dir.turn_left()
-	  elif output_value < 0:
-		  car_dir.turn_right()
-	  else:
-		  car_dir.home()
-	  motor.forward()
+		    pass#car_dir.turn_left()
+      elif output_value < 0:
+		    pass#car_dir.turn_right()
+      else:
+		    pass#car_dir.home()
+
+      #motor.forward()
       #sock.sendto('ai: %.6f' % output_value, (udp_host, udp_port))
 
     ch = cv2.waitKey(key_wait_time) & 0xFF
