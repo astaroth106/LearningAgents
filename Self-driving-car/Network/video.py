@@ -6,13 +6,11 @@ import tensorflow as tf
 import socket
 import sys
 
-sys.path.append("car_dir/")
+import video_dir
+import car_dir
+import motor
 
-#import video_dir
-#import car_dir
-#import motor
-
-video_output = True
+video_output = False
 
 from time import time
 time_next  = time()
@@ -24,17 +22,21 @@ else:
 
 import train
 
-udp_host = "localhost"
-udp_port = 4000
-sock     = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
 key_wait_time = 10
 input_size = 128
 
 capture = cv2.VideoCapture(0)
 
 model = train.build_model()
-model.load('checkpoints/road_model1-200000')
+model.load('checkpoints/road_model1-400000')
+
+video_dir.setup()
+car_dir.setup()
+motor.setup()     # Initialize the Raspberry Pi GPIO connected to the DC motor. 
+video_dir.home_x_y()
+car_dir.home()
+
+motor.setSpeed(50)
 
 def process_frame(frame):
   pr = model.predict(frame[np.newaxis, :, :, np.newaxis])
@@ -56,14 +58,14 @@ while capture.isOpened():
 
       output_value =  process_frame(frame_small)
       print(output_value)
-      if output_value > 0:
-		    pass#car_dir.turn_left()
-      elif output_value < 0:
-		    pass#car_dir.turn_right()
+      if output_value > 0.1:
+		    car_dir.turn_left()
+      elif output_value < -0.1:
+		    car_dir.turn_right()
       else:
-		    pass#car_dir.home()
+		    car_dir.home()
 
-      #motor.forward()
+      motor.forward()
       #sock.sendto('ai: %.6f' % output_value, (udp_host, udp_port))
 
     ch = cv2.waitKey(key_wait_time) & 0xFF
