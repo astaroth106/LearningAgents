@@ -28,7 +28,7 @@ input_size = 128
 capture = cv2.VideoCapture(0)
 
 model = train.build_model()
-model.load('road_model1-400000')
+model.load('road_model1-800000')
 
 video_dir.setup()
 car_dir.setup()
