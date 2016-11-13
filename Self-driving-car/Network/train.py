@@ -37,7 +37,7 @@ if __name__ == '__main__':
 		os.makedirs(checkpoint_path)
 
 	model = build_model()
-	model.load('road_model1-400000')
+	model.load('road_model1-800000')
 
 	# Train
 	for i in range(num_iterations):
