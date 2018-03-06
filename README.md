@@ -3,4 +3,4 @@ SeniorProjectUTRGV2016
 
 Carlos Pena
 
-Angel Hernandez
+Angel Hernandez (R.I.P.)
