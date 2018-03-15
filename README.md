@@ -1,6 +1,6 @@
 # LearningAgents
 SeniorProjectUTRGV2016
 
-Carlos Pena
+Authors: Carlos Pena, Angel Hernandez (R.I.P.)
 
-Angel Hernandez (R.I.P.)
+Video Demo: https://www.youtube.com/watch?v=RuCQLq79Cd0 
